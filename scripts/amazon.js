@@ -43,7 +43,7 @@
 
 //have to import cart from the cart.js file because we use module
 
-import { cart } from '../data/cart.js';
+import { cart, addToCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 let productsHtml = '';
 // products variable is come from data/products.js file
@@ -109,43 +109,29 @@ products.forEach((product) => {
 
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
 // --- Products ---
-document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
+document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {});
 });
 
-// ---Add to  Cart ---
+//--- cartQuantity function---
+function updateCartQuantity() {
+  let totalQuantity = 0;
+  cart.forEach((item) => {
+    totalQuantity += item.quantity;
+  });
+
+  document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+  console.log('Total cart quantity:', totalQuantity);
+}
 document.querySelectorAll('.js-add-to-cart').forEach((button) => {
   button.addEventListener('click', () => {
     //dataset property gives us access to all data that is attached to the element
 
+    //Add product to cart
     const productId = button.dataset.productId;
-
-    let matchingItem;
-    //Check if product is already in the cart
-    cart.forEach((item) => {
-      if (item.productId === productId) {
-        matchingItem = item;
-      }
-    });
-
-    if (matchingItem) {
-      matchingItem.quantity += 1;
-    } else {
-      cart.push({
-        productId: productId,
-        quantity: 1,
-      });
-    }
-
-    console.log(cart);
+    addToCart(productId);
 
     //-- Calculate the total quantity of the cart--//
-    let totalQuantity = 0;
-    cart.forEach((item) => {
-      totalQuantity += item.quantity;
-    });
-
-    document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
-    console.log('Total cart quantity:', totalQuantity);
+    updateCartQuantity();
   });
 });
