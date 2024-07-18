@@ -40,9 +40,14 @@
 //--- Combine the HTML of these products html --
 
 //ther
-let productsHtml = '';
 
+//have to import cart from the cart.js file because we use module
+
+import { cart } from '../data/cart.js';
+import { products } from '../data/products.js';
+let productsHtml = '';
 // products variable is come from data/products.js file
+
 products.forEach((product) => {
   productsHtml += `
    <div class="product-container">
