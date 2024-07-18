@@ -105,9 +105,7 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid').innerHTML = productsHtml;
 // --- Products ---
 document.querySelectorAll('.js-add-to-cart').forEach((button, index) => {
-  button.addEventListener('click', () => {
-    console.log('Added product');
-  });
+  button.addEventListener('click', () => {});
 });
 
 // ---Add to  Cart ---
@@ -135,5 +133,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
     }
 
     console.log(cart);
+
+    //-- Calculate the total quantity of the cart--//
+    let totalQuantity = 0;
+    cart.forEach((item) => {
+      totalQuantity += item.quantity;
+    });
+
+    document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+    console.log('Total cart quantity:', totalQuantity);
   });
 });
