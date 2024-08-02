@@ -9,12 +9,6 @@ import {
 import { getProduct } from '../../data/products.js';
 import { renderPaymentSummary } from './paymentSummary.js';
 
-//--- Deal with delivery date ---
-const today = dayjs();
-const deliveryDate = today.add(7, 'days'); //add 7 days to today (7 days after today)
-console.log(deliveryDate.format('dddd,MMMM,D'));
-//console.log(deliveryDate);
-
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
 
