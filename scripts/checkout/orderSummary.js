@@ -7,6 +7,7 @@ import {
   getDeliveryOption,
 } from '../../data/deliveryOptions.js';
 import { getProduct } from '../../data/products.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 //--- Deal with delivery date ---
 const today = dayjs();
@@ -128,6 +129,8 @@ export function renderOrderSummary() {
       //console.log(cart);
       console.log(container);
       container.remove();
+      //--rerender payment summary--
+      renderPaymentSummary();
 
       //--Another way to remove product from cart
       // cart.forEach((cartItem) => {
@@ -145,6 +148,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = option.dataset;
       updateDeliveryOption(productId, deliveryOptionId); //controller update data
       renderOrderSummary(); //regenerate view
+      renderPaymentSummary(); //regenerate view of payment summary
     });
   });
 }
